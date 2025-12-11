@@ -96,4 +96,3 @@ void swap_print(int *array, int index_low, int index_high, size_t size)
 	array[index_high] = tmp;
 	print_array(array, size);
 }
-
