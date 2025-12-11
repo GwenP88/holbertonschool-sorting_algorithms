@@ -73,7 +73,7 @@ int partition(int *array, int index_start, int index_end, size_t size)
 			i++;
 		}
 	}
-	if (index_end != i)
+	if (index_end != i && array[index_end] != array[i])
 		swap_print(array, index_end, i, size);
 	return (i);
 }
