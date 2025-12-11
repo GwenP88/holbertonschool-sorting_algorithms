@@ -1,5 +1,13 @@
 #include "sort.h"
 
+/* ------------ prototypes ------------ */
+listint_t *swap_head(listint_t **list,
+	listint_t *current, listint_t *prev, listint_t *next);
+listint_t *swap_tail(listint_t *prev_prev,
+	listint_t *prev, listint_t *current);
+listint_t *swap_middle(listint_t *prev_prev,
+	listint_t *prev, listint_t *current, listint_t *next);
+
 /**
  * insertion_sort_list - function that sorts a doubly linked list of integers
  * in ascending order using the Insertion sort algorithm
@@ -25,38 +33,16 @@ void insertion_sort_list(listint_t **list)
 		{
 			if (prev_node->prev == NULL)
 			{
-				(*list) = current_node;
-				current_node->prev = NULL;
-				current_node->next = prev_node;
-				prev_node->prev = current_node;
-				if (next_node == NULL)
-					prev_node->next = NULL;
-				else
-				{
-					prev_node->next = next_node;
-					next_node->prev = prev_node;
-				}
-				next_node = current_node->next;
-				/*next_node = swap_head()*/
+				next_node = swap_head(list, current_node, prev_node, next_node);
 			}
 			else if (current_node->next == NULL)
 			{
-				(prev_node->prev)->next = current_node;
-				current_node->prev = prev_node->prev;
-				current_node->next = prev_node;
-				prev_node->next = NULL;
-				prev_node->prev = current_node;
-				next_node = current_node->next;
+				next_node = swap_tail(prev_node->prev, prev_node, current_node);
 			}
 			else
 			{
-				(prev_node->prev)->next = current_node;
-				current_node->prev = (prev_node->prev);
-				current_node->next = prev_node;
-				prev_node->next = next_node;
-				prev_node->prev = current_node;
-				next_node->prev = prev_node;
-				next_node = current_node->next;
+				next_node = swap_middle
+					(prev_node->prev, prev_node, current_node, next_node);
 			}
 			print_list(*list);
 			prev_node = current_node->prev;
@@ -67,31 +53,40 @@ void insertion_sort_list(listint_t **list)
 	}
 }
 
-listint_t *swap_head(listint_t **list, listint_t *current, listint_t *prev, listint_t *next)
+/**
+ * swap_head - déplace un nœud vers la tête de la liste
+ * @list: adresse du pointeur vers la liste
+ * @current: nœud qui doit remonter dans la liste
+ * @prev: ancien précédent du nœud actuel (devient le suivant)
+ * @next: nœud suivant avant l’opération de swap
+ * Return: pointeur vers le prochain nœud à traiter dans l’algorithme
+ */
+
+listint_t *swap_head(listint_t **list,
+	listint_t *current, listint_t *prev, listint_t *next)
 {
-	/**
-	 * current = current_node
-	 * prev = prev_node
-	 * next = next_node
-	 * remplacer dans le code
-	 */
-
-
-	(*list) = current_node;
-	current_node->prev = NULL;
-	current_node->next = prev_node;
-	prev_node->prev = current_node;
-	if (next_node == NULL)
-		prev_node->next = NULL;
+	(*list) = current;
+	current->prev = NULL;
+	current->next = prev;
+	prev->prev = current;
+	if (next == NULL)
+		prev->next = NULL;
 	else
 	{
-		prev_node->next = next_node;
-		next_node->prev = prev_node;
+		prev->next = next;
+		next->prev = prev;
 	}
-	next_node = current_node->next;
+	next = current->next;
 	return (next);
 }
 
+/**
+ * swap_tail - réinsère un nœud juste avant la fin de la liste
+ * @prev_prev: nœud situé avant @prev
+ * @prev: nœud actuellement placé avant la fin de la liste
+ * @current: nœud à repositionner
+ * Return: pointeur vers le prochain nœud à analyser dans le tri
+ */
 
 listint_t *swap_tail(listint_t *prev_prev, listint_t *prev, listint_t *current)
 {
@@ -107,14 +102,24 @@ listint_t *swap_tail(listint_t *prev_prev, listint_t *prev, listint_t *current)
 	return (next);
 }
 
-listint_t *swap_middle(listint_t *prev_prev, listint_t *prev, listint_t *current, listint_t *next)
+/**
+ * swap_middle - déplace un nœud au milieu de la liste
+ * @prev_prev: nœud placé avant @prev
+ * @prev: nœud précédent actuellement @current
+ * @current: nœud à repositionner dans la liste
+ * @next: nœud suivant la position initiale de @current
+ * Return: pointeur vers le nœud suivant pour la boucle externe
+ */
+
+listint_t *swap_middle(listint_t *prev_prev,
+	listint_t *prev, listint_t *current, listint_t *next)
 {
-	(prev_node->prev)->next = current_node;
-	current_node->prev = (prev_node->prev);
-	current_node->next = prev_node;
-	prev_node->next = next_node;
-	prev_node->prev = current_node;
-	next_node->prev = prev_node;
-	next_node = current_node->next;
+	prev_prev->next = current;
+	current->prev = prev_prev;
+	current->next = prev;
+	prev->next = next;
+	prev->prev = current;
+	next->prev = prev;
+	next = current->next;
 	return (next);
 }
