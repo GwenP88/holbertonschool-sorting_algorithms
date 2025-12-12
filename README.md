@@ -1,9 +1,16 @@
 ![Banner sorting Algorithms](assets/sorting_algorithms.png)
 
 # Sorting Algorithms – Holberton School  
-_Group project (pair programming)_
 
----
+## Authors
+
+This project was developed collaboratively using pair programming.
+
+- **GwenP88**  
+  GitHub: https://github.com/GwenP88
+
+- **Ali731-Amb**  
+  GitHub: https://github.com/Ali731-Amb
 
 ## Introduction
 
