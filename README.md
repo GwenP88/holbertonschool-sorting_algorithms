@@ -103,7 +103,7 @@ Replace filenames as appropriate for each task.
 ## 📊 Project Progress
 
 <p align="center">
-<img src="assets/sorting_algorithms.png" alt="Sorting Algorithms Banner" width="80%">
+<img src="assets/progress_barre_100.gif" alt="Progress barre" width="80%">
 </p>
 
 <p align="center">
