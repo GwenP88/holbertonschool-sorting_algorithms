@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/banner1.png" alt="holbertonschool-sorting-algorithms Banner" width="800">
+</p>
+
 # sorting_algorithms
 
 > Sorting is not just putting things in order — it's understanding *how* and *why* one order beats another.
@@ -107,6 +111,10 @@ Replace filenames as appropriate for each task.
 </p>
 
 ---
+
+<p align="center">
+  <img src="./assets/banner.jpeg" alt="holbertonschool-sorting-algorithms Banner" width="500">
+</p>
 
 ## ✨ Features
 
